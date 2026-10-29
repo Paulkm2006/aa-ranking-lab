@@ -38,3 +38,10 @@ The repository metadata request still returned HTTP 404. The previously denied r
 Prepared `.github/workflows/pages.yml`: main/manual trigger, lint/unit/build/browser checks before artifact upload, separate deployment job, `github-pages` environment, job-scoped Pages/OIDC permissions. Fixed Vite base and production browser test URLs to `/aa-ranking-lab/`.
 
 Local verification passed again: lint, 17 unit tests, TypeScript/production build, both browser scenarios against the project subpath. Added successful download and local import of `example.csv` from that subpath, in addition to LP worker, JSON import and drag checks. Remote workflow execution and the live public URL remain unverified because the repository is still unavailable.
+
+
+## Repository publication follow-up (2026-10-29)
+
+The user supplied the now-created repository. Verified it is public, empty, and writable before pushing main normally; no existing commits were overwritten. Source and Pages workflow are now on GitHub.
+
+Enabling Pages using `POST /repos/Paulkm2006/aa-ranking-lab/pages` with `build_type=workflow` was denied with HTTP 403 `Resource not accessible by integration`. A subsequent Pages GET returned 404. No repeated enable attempt was made after that denial. A repository administrator must select Settings → Pages → Source → GitHub Actions, then run the Deploy Pages workflow. The deployed public page remains unverified until that succeeds.

@@ -131,4 +131,4 @@ s.t. (xᵢ − xᵢ₊₁) · w + sᵢ ≥ 0.01
 
 仓库存在且有相应权限后，在 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**，然后推送 main 或运行 Deploy Pages。公开网址以部署步骤返回的 `page_url` 为准。预期项目路径为 `/aa-ranking-lab/`；在部署实际成功之前，不应将预期 URL 当作已上线地址。
 
-当前状态：目标仓库查询仍返回 HTTP 404，已有 GitHub integration 不具有创建仓库权限，部署配置仅保存在本地，尚未上传或部署。无需添加任何第三方密钥。
+当前状态：代码及部署工作流已发布至 public 仓库。现有 GitHub integration 在开启 Pages 时返回 HTTP 403，因此需要仓库管理员在上述设置中选择 GitHub Actions，然后运行 Deploy Pages。尚未确认站点上线；无需添加任何第三方密钥。
