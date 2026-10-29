@@ -15,7 +15,7 @@ npm ci
 npm run dev
 ```
 
-生产产物：`npm run build` → `dist/`，可部署到任何静态站点服务，包括 GitHub Pages 子路径；Vite 使用相对 base。没有服务器、账号、分析跟踪或付费服务。没有自动部署工作流。
+生产产物：`npm run build` → `dist/`，可部署到任何静态站点服务，包括 GitHub Pages 子路径；Vite 固定使用 `/aa-ranking-lab/` base。没有服务器、账号、分析跟踪或付费服务。已包含 GitHub Pages 自动部署工作流。
 
 ```sh
 npm run lint
@@ -122,3 +122,13 @@ s.t. (xᵢ − xᵢ₊₁) · w + sᵢ ≥ 0.01
 - CI 执行 lint、单元测试、类型检查、生产构建、浏览器测试，上传截图证据。
 
 [窄屏截图](docs/mobile.png) · [冲突截图](docs/conflict.png)
+
+## GitHub Pages 部署
+
+本地预览地址为 `http://localhost:5173/aa-ranking-lab/`，生产预览地址为 `http://localhost:4173/aa-ranking-lab/`。如果更换仓库名称，需要同步更新 `vite.config.ts` 的 base 和 `playwright.config.ts` 的 baseURL / webServer URL。
+
+`.github/workflows/pages.yml` 在 main 推送或手动触发时执行依赖安装、Lint、单元测试、生产构建、生产浏览器测试，然后上传 `dist` 并部署 GitHub Pages。部署作业仅授予 `pages: write` / `id-token: write`，使用 `github-pages` environment。PR 的 CI 不部署。
+
+仓库存在且有相应权限后，在 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**，然后推送 main 或运行 Deploy Pages。公开网址以部署步骤返回的 `page_url` 为准。预期项目路径为 `/aa-ranking-lab/`；在部署实际成功之前，不应将预期 URL 当作已上线地址。
+
+当前状态：目标仓库查询仍返回 HTTP 404，已有 GitHub integration 不具有创建仓库权限，部署配置仅保存在本地，尚未上传或部署。无需添加任何第三方密钥。

@@ -30,3 +30,11 @@ The independent local project is ready to push once a repository is created with
 - No public hosted URL; static `dist/` is generated and ready for hosting. No hosting accounts/services were provisioned.
 - Chromium desktop/mobile emulation tested; physical devices, Safari and Firefox not tested.
 - LP uses finite precision; optimal-face ranges are sensitivity bounds, not statistical confidence intervals.
+
+## GitHub Pages follow-up (2026-10-29)
+
+The repository metadata request still returned HTTP 404. The previously denied repository creation was not retried because no new permission evidence was available. No Pages settings were mutated and no push or deployment was attempted against a missing/inaccessible repository.
+
+Prepared `.github/workflows/pages.yml`: main/manual trigger, lint/unit/build/browser checks before artifact upload, separate deployment job, `github-pages` environment, job-scoped Pages/OIDC permissions. Fixed Vite base and production browser test URLs to `/aa-ranking-lab/`.
+
+Local verification passed again: lint, 17 unit tests, TypeScript/production build, both browser scenarios against the project subpath. Added successful download and local import of `example.csv` from that subpath, in addition to LP worker, JSON import and drag checks. Remote workflow execution and the live public URL remain unverified because the repository is still unavailable.

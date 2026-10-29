@@ -4,7 +4,7 @@ test("desktop drag, keyboard, reset, conflicts and import recovery", async ({
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/");
+  await page.goto("./");
   await expect(page.locator(".solve-status")).not.toContainText("正在解算");
   await page.screenshot({ path: "docs/desktop.png", fullPage: true });
   const rows = page.getByTestId("model-row");
@@ -72,6 +72,18 @@ test("desktop drag, keyboard, reset, conflicts and import recovery", async ({
   await expect(page.locator(".solve-status")).toContainText("至少需要两个");
   await page.getByRole("button", { name: "恢复演示数据" }).click();
   await expect(rows).toHaveCount(10);
+  const template = await page.request.get("example.csv");
+  expect(template.status()).toBe(200);
+  await page
+    .getByLabel("导入评分文件")
+    .setInputFiles({
+      name: "example.csv",
+      mimeType: "text/csv",
+      buffer: await template.body(),
+    });
+  await expect(rows).toHaveCount(3);
+  await expect(page.locator(".solve-status")).not.toContainText("正在解算");
+  await expect(page.locator(".source")).toContainText("synthetic-v1");
   expect(errors).toEqual([]);
 });
 test("mobile viewport and touch dragging", async ({ browser }) => {
@@ -81,7 +93,7 @@ test("mobile viewport and touch dragging", async ({ browser }) => {
     isMobile: true,
   });
   const page = await context.newPage();
-  await page.goto("/");
+  await page.goto("./");
   await expect(page.locator(".solve-status")).not.toContainText("正在解算");
   expect(
     await page.evaluate(
