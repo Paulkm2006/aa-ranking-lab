@@ -1,0 +1,4 @@
+id,name,provider,source,asOf,synthetic,version,configuration,normalization,Reasoning:max,Coding:max,Latency:min
+alpha,Example Alpha,Fictional Labs,Synthetic fixture - not AA measurements,2026-10-29,true,synthetic-v1,Fictional models,Raw values,85,74,300
+beta,Example Beta,Fictional Labs,Synthetic fixture - not AA measurements,2026-10-29,true,synthetic-v1,Fictional models,Raw values,78,92,450
+gamma,Example Gamma,Fictional Labs,Synthetic fixture - not AA measurements,2026-10-29,true,synthetic-v1,Fictional models,Raw values,69,65,120
